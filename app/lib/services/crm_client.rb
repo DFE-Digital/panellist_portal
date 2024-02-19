@@ -43,6 +43,22 @@ class Services::CrmClient
     JSON.parse(response.body)
   end
 
+  # resource example: "contacts(contact-guid-goes-here)"
+  def update(resource:, attributes: {})
+    uri = URI("")
+
+    request = Net::HTTP::Patch.new(uri)
+    request["Authorization"] = "Bearer #{access_token}"
+    request["Content-Type"] = "application/json"
+    request.body = attributes.to_json
+
+    response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
+      http.request(request)
+    end
+
+    response.code == "204"
+  end
+
   private
 
   def access_token
