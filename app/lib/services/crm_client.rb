@@ -20,8 +20,18 @@ class Services::CrmClient
     @entities = JSON.parse(response.body)
   end
 
-  def entity(thing)
-    uri = URI("")
+  def entity(thing:, filters: {})
+    uri_string = ""
+
+    if filters.any?
+      uri_string << "?$filter="
+
+      filters.each do |k,v|
+        uri_string << "#{k} eq '#{v}'"
+      end
+    end
+
+    uri = URI(uri_string)
 
     request = Net::HTTP::Get.new(uri)
     request["Authorization"] = "Bearer #{access_token}"
