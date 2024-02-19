@@ -1,0 +1,15 @@
+<p>
+  @odata.context <%= @entities["@odata.context"] %>
+</p>
+
+<p>
+  <% @entities["value"].each do |node| %>
+    <ul>
+      <li>name: <%= node["name"] %></li>
+      <li>kind: <%= node["kind"] %></li>
+      <li>url: <%= link_to node["url"], entity_path(node["url"]) %></li>
+    </ul>
+
+    <br>
+  <% end %>
+</p>

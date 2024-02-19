@@ -1,0 +1,17 @@
+<p>
+  @odata.context <%= @entity["@odata.context"] %>
+</p>
+
+<% @entity["value"][0..3].each do |hash| %>
+  <table>
+    <% hash.each do |k,v| %>
+      <tr>
+        <td><%= k %></td>
+        <td><%= v %></td>
+      </tr>
+    <% end %>
+  </table>
+
+  ===
+  <br>
+<% end %>
