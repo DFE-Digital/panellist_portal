@@ -2,6 +2,10 @@ require "net/http"
 require "pry"
 
 class Services::CrmClient
+  class << self
+    attr_accessor :access_token
+  end
+
   def initialize
   end
 
@@ -62,11 +66,13 @@ class Services::CrmClient
   private
 
   def access_token
-    return @access_token if @access_token
+    return self.class.access_token if self.class.access_token
+
+    puts "fetching new access token..."
 
     response = Net::HTTP.post_form(token_uri, grant_type:, resource:, client_id:, client_secret:)
 
-    @access_token = JSON.parse(response.body).dig("access_token")
+    self.class.access_token = JSON.parse(response.body).dig("access_token")
   end
 
   def token_uri
