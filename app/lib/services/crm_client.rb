@@ -12,7 +12,7 @@ class Services::CrmClient
   def entities
     return @entities if @entities
 
-    uri = URI("")
+    uri = URI("#{resource}/api/data/v8.2/")
 
     request = Net::HTTP::Get.new(uri)
     request["Authorization"] = "Bearer #{access_token}"
@@ -25,7 +25,7 @@ class Services::CrmClient
   end
 
   def entity(thing:, filters: {})
-    uri_string = ""
+    uri_string = "#{resource}/api/data/v8.2/#{thing}"
 
     if filters.any?
       uri_string << "?$filter="
@@ -49,7 +49,7 @@ class Services::CrmClient
 
   # resource example: "contacts(contact-guid-goes-here)"
   def update(resource:, attributes: {})
-    uri = URI("")
+    uri = URI("#{resource}/api/data/v8.2/#{resource}")
 
     request = Net::HTTP::Patch.new(uri)
     request["Authorization"] = "Bearer #{access_token}"
