@@ -60,6 +60,8 @@ class Services::CrmClient
       http.request(request)
     end
 
+    puts response.body
+
     response.code == "204"
   end
 
