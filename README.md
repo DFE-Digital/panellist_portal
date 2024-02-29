@@ -15,6 +15,8 @@ In order to gain access to a Dynamics instance you will need to collect the foll
 - `client_id` - this is a GUID of the client credentials
 - `client_secret` - this is a 40 character string and the secret for the credential pair
 
+The URIs used in this code based have been hard coded to a specific version and you may have to change them to match the version of the API you are connecting to.
+
 ## Usage
 
 After starting the server:
