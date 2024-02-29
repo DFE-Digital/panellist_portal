@@ -36,3 +36,8 @@ To update an existing record:
 ```
 client.update(resource: "contacts(contact-guid-goes-here)", attributes: { key_to_change: "new_value_here" })
 ```
+
+## Important notes
+
+- if no access token is found it will request one from the server and this client will cache it
+- the cache is very rudimentary and should the token expire simply restart the server to clear the cache and therefore it will request a new access token
